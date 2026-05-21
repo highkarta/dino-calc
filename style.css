@@ -46,11 +46,17 @@ button{
   border-radius: 100%;
   width: 70px;
   height: 70px;
-  border: 2px dashed salmon;
+  border: 2px dashed #5e503f;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
   font-size: 18px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: #c6ac8f;
 }
+
+/*
+button:hover{
+}
+*/
