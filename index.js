@@ -75,7 +75,13 @@ const display = document.querySelector('#display');
 
 function displayResult(result) {
   display.innerText = result;
+  arrValues[0] = result;
+  arrValues[1] = '';
+  arrValues[2] = '';
 }
 function clearResult() {
   display.innerText = 0;
+  arrValues[0] = '';
+  arrValues[1] = '';
+  arrValues[2] = '';
 }
