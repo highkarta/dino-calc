@@ -29,55 +29,53 @@ function divide(a, b) {
 }
 
 // LOGIC
-let arrValues = [];
+let arrValues = ['', '', ''];
 
 const buttonsDiv = document.querySelector('#buttons');
 buttonsDiv.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
     // should I use strict equality? -> Yes you should
-    // console.log(event.target.innerText);
     let value = event.target.innerText;
-    let operator, num1, num2;
-    if (event.target.dataset.type == 'operator') {
-      operator = value;
-      arrValues.splice(2, 0, operator);
+    if (event.target.dataset.type != 'operator') {
+      if(arrValues[1] == ''){
+        arrValues[0] += value;
+      }else{
+        arrValues[2] += value;
+      }
     } else {
-      num1 = value;
-      num2 = value;
-      arrValues.splice(0, 0, num1);
-      arrValues.splice(1, 0, num2);
+      arrValues[1] = value;
     }
-    console.log(arrValues[0], arrValues[1], arrValues[2]);
     operate(arrValues[0], arrValues[1], arrValues[2]);
   }
 });
 
-// function checkData(event){}
-
-function operate(a, b, operator) {
+function operate(a, operator, b) {
   a = +a;
   b = +b;
-  if (operator == '+') {
-    add(a, b);
-  } else if (operator == '-') {
-    subtract(a, b);
-  } else if (operator == '*') {
-    multiply(a, b);
-  } else if (operator == '/') {
-    divide(a, b);
-  } else if (operator == '=') {
-    displayResult(result);
-  } else if (operator == 'AC') {
-    clearResult();
-  } else {
-    console.log('error');
+  console.log(operator);
+  if(operator){
+    if (operator == '+') {
+      add(a, b);
+    } else if (operator == '-') {
+      subtract(a, b);
+    } else if (operator == '*') {
+      multiply(a, b);
+    } else if (operator == '/') {
+      divide(a, b);
+    } else if (operator == '=') {
+      displayResult(result);
+    } else if (operator == 'AC') {
+      clearResult();
+    } else {
+      console.log('error');
+    }
   }
 }
+const display = document.querySelector('#display');
 
 function displayResult(result) {
-  const display = document.querySelector('#display');
   display.innerText = result;
 }
 function clearResult() {
-  console.log('cleared');
+  display.innerText = 0;
 }
