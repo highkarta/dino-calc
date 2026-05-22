@@ -1,63 +1,83 @@
+let result = 0;
+
 function add(a, b) {
-  return a + b;
+  result = a + b;
+  return result;
 }
 
 function subtract(a, b) {
   if (a >= b) {
-    return a - b;
+    result = a - b;
   } else {
-    return b - a;
+    result = b - a;
   }
+  return result;
 }
 
 function multiply(a, b) {
-  return a * b;
+  result = a * b;
+  return result;
 }
 
 function divide(a, b) {
   if (a >= b) {
-    return a / b;
+    result = a / b;
   } else {
-    return b / a;
+    result = b / a;
   }
+  return result;
 }
+
+// LOGIC
+let arrValues = [];
 
 const buttonsDiv = document.querySelector('#buttons');
 buttonsDiv.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
     // should I use strict equality? -> Yes you should
     // console.log(event.target.innerText);
-    let num1 = 0;
-    let num2 = 0;
-    if(event.target.dataset.type == "function"){
-      console.log("function was clicked");
-    }else if(event.target.dataset.type == "operator"){
-      let operator = event.target.innerText;
-      operate(num1, num2, operator);
-    }else{
-      console.log("number was clicked");
+    let value = event.target.innerText;
+    let operator, num1, num2;
+    if (event.target.dataset.type == 'operator') {
+      operator = value;
+      arrValues.splice(2, 0, operator);
+    } else {
+      num1 = value;
+      num2 = value;
+      arrValues.splice(0, 0, num1);
+      arrValues.splice(1, 0, num2);
     }
+    console.log(arrValues[0], arrValues[1], arrValues[2]);
+    operate(arrValues[0], arrValues[1], arrValues[2]);
   }
 });
 
+// function checkData(event){}
+
 function operate(a, b, operator) {
-  if(operator == '+'){
-    console.log("hello");
+  a = +a;
+  b = +b;
+  if (operator == '+') {
     add(a, b);
-  }else if(operator == '-'){
+  } else if (operator == '-') {
     subtract(a, b);
-  }else if(operator == '*'){
+  } else if (operator == '*') {
     multiply(a, b);
-  }else if(operator == '/'){
+  } else if (operator == '/') {
     divide(a, b);
-  }else if(operator == '='){
-    displayResult();
-  }else if(operator == 'AC'){
+  } else if (operator == '=') {
+    displayResult(result);
+  } else if (operator == 'AC') {
     clearResult();
-  }else{
-    console.log("error");
+  } else {
+    console.log('error');
   }
 }
 
-function displayResult() {}
-function clearResult() {}
+function displayResult(result) {
+  const display = document.querySelector('#display');
+  display.innerText = result;
+}
+function clearResult() {
+  console.log('cleared');
+}
