@@ -1,4 +1,5 @@
 let result = 0;
+const display = document.querySelector('#display');
 
 function add(a, b) {
   result = a + b;
@@ -6,11 +7,7 @@ function add(a, b) {
 }
 
 function subtract(a, b) {
-  if (a >= b) {
-    result = a - b;
-  } else {
-    result = b - a;
-  }
+  result = a - b;
   return result;
 }
 
@@ -20,11 +17,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  if (a >= b) {
-    result = a / b;
-  } else {
-    result = b / a;
-  }
+  result = a / b;
   return result;
 }
 
@@ -34,12 +27,11 @@ let arrValues = ['', '', ''];
 const buttonsDiv = document.querySelector('#buttons');
 buttonsDiv.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
-    // should I use strict equality? -> Yes you should
     let value = event.target.innerText;
     if (event.target.dataset.type != 'operator') {
-      if(arrValues[1] == ''){
+      if (arrValues[1] == '') {
         arrValues[0] += value;
-      }else{
+      } else {
         arrValues[2] += value;
       }
     } else {
@@ -50,12 +42,15 @@ buttonsDiv.addEventListener('click', (event) => {
 });
 
 function operate(a, operator, b) {
+  // when operating on numbers, convert strings to numbers
   a = +a;
   b = +b;
-  console.log(operator);
-  if(operator){
+
+  if (operator) {
+    display.innerText = arrValues[0] + arrValues[1] + arrValues[2];
     if (operator == '+') {
       add(a, b);
+      // displayResult(result);
     } else if (operator == '-') {
       subtract(a, b);
     } else if (operator == '*') {
@@ -71,15 +66,17 @@ function operate(a, operator, b) {
     }
   }
 }
-const display = document.querySelector('#display');
 
 function displayResult(result) {
-  display.innerText = result;
+  // display mei add input being displayed too
   arrValues[0] = result;
+  display.innerText = arrValues[0];
   arrValues[1] = '';
   arrValues[2] = '';
 }
+
 function clearResult() {
+  // reset all ds
   display.innerText = 0;
   arrValues[0] = '';
   arrValues[1] = '';
