@@ -18,6 +18,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   result = a / b;
+  result = Number(result.toFixed(2));
   return result;
 }
 
@@ -37,6 +38,7 @@ buttonsDiv.addEventListener('click', (event) => {
     } else {
       arrValues[1] = value;
     }
+    console.log(arrValues[0], arrValues[1], arrValues[2]);
     operate(arrValues[0], arrValues[1], arrValues[2]);
   }
 });
@@ -57,12 +59,13 @@ function operate(a, operator, b) {
       multiply(a, b);
     } else if (operator == '/') {
       divide(a, b);
-    } else if (operator == '=') {
-      displayResult(result);
     } else if (operator == 'AC') {
       clearResult();
     } else {
       console.log('error');
+    }
+    if(arrValues[0] && arrValues[1] && arrValues[2]){
+      displayResult(result);
     }
   }
 }
